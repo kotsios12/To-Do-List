@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import TaskInputComp from "./TaskInputComp";
+import Listitem from "./Listitem";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -33,18 +34,12 @@ function App() {
       <TaskInputComp onAddTask={addTask} />
       <ul className="task-list">
         {tasks.map((task) => (
-          <li
+          <Listitem
             key={task.id}
-            className={task.isCompleted ? "task completed" : "task"}
-          >
-            <input
-              type="checkbox"
-              checked={task.isCompleted}
-              onChange={() => toggleComplete(task.id)}
-            />
-            <span>{task.text}</span>
-            <button onClick={() => removeTask(task.id)}>Delete</button>
-          </li>
+            task={task}
+            onToggleComplete={toggleComplete}
+            onRemoveTask={removeTask}
+          />
         ))}
       </ul>
     </div>
